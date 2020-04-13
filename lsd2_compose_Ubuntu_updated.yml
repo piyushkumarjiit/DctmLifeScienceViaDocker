@@ -1,0 +1,275 @@
+version: '3.3'
+services:
+  cs-db:
+    image: postgres:9.4
+    container_name:
+      "postgres"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres:/docker-entrypoint-initdb.d
+      - postgres_db_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - DOCBASE_NAME=${DOCBASE_NAME}
+
+  rcs:
+    image: localhost:5000/lifescience/ubuntu/stateless/lsd2cs:16.4.0000.0509
+    environment:
+      - DOCKER_HOST=${DCTM_DOCKER_HOST}
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_SERVER_PORT=${DATABASE_SERVER_PORT}
+      - ROOT_PASSWORD=${ROOT_PASSWORD}
+      - INSTALL_OWNER=${INSTALL_OWNER}
+      - INSTALL_OWNER_PASSWORD=${INSTALL_OWNER_PASSWORD}
+      - DOCBASE_NAME=${DOCBASE_NAME}
+      - GLOBAL_REGISTRY_PASSWORD=${GLOBAL_REGISTRY_PASSWORD}
+      - AEK_ALGORITHM=AES_256_CBC
+      - AEK_PASSPHRASE=${AEK_PASSPHRASE}
+      - AEK_NAME=${AEK_NAME}
+      - ENABLE_LOCKBOX=${ENABLE_LOCKBOX}
+      - LOCKBOX_FILE_NAME=${LOCKBOX_FILE_NAME}
+      - LOCKBOX_PASSPHRASE=${LOCKBOX_PASSPHRASE}
+      - CONFIGURE_THUMBNAIL_SERVER=${CONFIGURE_THUMBNAIL_SERVER}
+      - THUMBNAIL_SERVER_PORT=${THUMBNAIL_SERVER_PORT}
+      - THUMBNAIL_SERVER_SSL_PORT=${THUMBNAIL_SERVER_SSL_PORT}
+      - EXTERNAL_DOCBROKER_PORT=${EXTERNAL_DOCBROKER_PORT}
+      - CONTENTSERVER_PORT=${CONTENTSERVER_PORT}
+      - APP_SERVER_PASSWORD=${APP_SERVER_PASSWORD}
+      - INSTALL_OWNER_UID=${INSTALL_OWNER_UID}
+      - HIGH_VOLUME_SERVER_LICENSE=
+      - TRUSTED_LICENSE=
+      - STORAGEAWARE_LICENSE=
+      - XMLSTORE_LICENSE=
+      - SNAPLOCKSTORE_LICENSE=
+      - RPS_LICENSE=
+      - FED_RECD_SERVICE_LICENSE=
+      - RECORD_MANAGER_LICENSE=
+      - PRM_LICENSE=
+      - DOCBASE_PASSWORD=${DOCBASE_PASSWORD}
+      - INSTALLER_UI=silent
+      - KEEP_TEMP_FILE=false
+      - INSTALLER_DEBUG_LOG=true
+      - DOCBASE_ID=${DOCBASE_ID}
+      - USE_EXISTING_DATABASE_ACCOUNT=
+      - INDEXSPACE_NAME=DM_XCHIVE_DOCBASE
+      - USE_EXISTING_AEK_LOCKBOX=${USE_EXISTING_AEK_LOCKBOX}
+      - LSCONFIG_IMPORT_MODE=1
+      - APPSERVER_URL=${APPSERVER_URL}
+      - D2APP_NAME=${D2APP_NAME}
+      - CONTROLLEDPRINT_URL=${CONTROLLEDPRINT_URL}
+      - PDF_DOC_INFO=subject
+      - PDF_DOC_DELIMITER=#
+      - NUMBEROFSUBMISSIONS=${NUMBEROFSUBMISSIONS}
+      - SUBMISSION_FILESTORE_LOCATION=${SUBMISSION_FILESTORE_LOCATION}
+      - SUBMISSION_ALIAS_VALUE=${SUBMISSION_ALIAS_VALUE}
+      - CONTROLLED_PRINT_ADMIN_USER=dmadmin
+      - D2_CONFIG_URL=${D2_CONFIG_URL}
+      - D2_CLIENT_URL=${D2_CLIENT_URL}
+      - XMLVIEWER_URL=${XMLVIEWER_URL}
+      - LIFESCIENCES_SOLUTION=${LIFESCIENCES_SOLUTION}
+    hostname:
+      "lsd2cs"
+    container_name:
+      "lsd2cs"
+    ports:
+      - "1689:1689"
+      - "1690:1690"
+      - "50000:50000"
+      - "50001:50001"
+      - "9080:9080"
+      - "9082:9082"
+      - "9081:9081"
+      - "9084:9084"
+    volumes:
+      - lsd2repo1_odbc:/opt/dctm/odbc
+      - lsd2repo1_data:/opt/dctm/data
+      - lsd2repo1_dba:/opt/dctm/dba
+      - lsd2repo1_share:/opt/dctm/share
+      - lsd2repo1_dfc:/opt/dctm/config
+      - lsd2repo1_mdserver_conf:/opt/dctm/mdserver_conf
+      - lsd2repo1_mdserver_log:/opt/dctm/wildfly9.0.1/server/DctmServer_MethodServer/log
+      - lsd2repo1_mdserver_logs:/opt/dctm/wildfly9.0.1/server/DctmServer_MethodServer/logs
+      - lsd2repo1_Thumbnail_Server_conf:/opt/dctm/product/16.3/thumbsrv/conf
+      - lsd2repo1_Thumbnail_Server_webinf:/opt/dctm/product/16.3/thumbsrv/container/webapps/thumbsrv/WEB-INF
+      - lsd2repo1_xhive_storage:/opt/dctm/xhive_storage
+      - lsd2repo1_XhiveConnector:/opt/dctm/wildfly9.0.1/server/DctmServer_MethodServer/deployments/XhiveConnector.ear
+      - lsd2repo1_d2_install:/opt/D2-install
+      - lsd2repo1_ServerApps:/opt/dctm/wildfly9.0.1/server/DctmServer_MethodServer/deployments/ServerApps.ear
+      - lsd2repo1_acs:/opt/dctm/wildfly9.0.1/server/DctmServer_MethodServer/deployments/acs.ear
+      - lsd2repo1_bpm:/opt/dctm/wildfly9.0.1/server/DctmServer_MethodServer/deployments/bpm.ear
+      - lsd2repo1_mdserver_modules_emc:/opt/dctm/wildfly9.0.1/modules/system/layers/base/emc
+      - lsd2repo1_opt_opentext_d2:/opt/OpenText/D2
+      - lsd2repo1_install:/opt/dctm/product/16.4/install/logs
+      - lsd2repo1_ls_install:/opt/ls_install
+    privileged: true
+    depends_on:
+      - cs-db
+ 
+  da:
+    image: localhost:5000/da_centos:16.4.0000.0048
+    environment:
+      - DOCBROKER_IP=${DOCBROKER_HOST}
+      - DOCBROKER_PORT=${DOCBROKER_PORT}
+      - GLOBAL_REGISTRY_DOCBASE_NAME=${GLOBAL_REGISTRY_DOCBASE_NAME}
+      - BOF_REGISTRY_USER_PASSWORD=${GLOBAL_REGISTRY_PASSWORD}
+      - CRYPTO_REGISTRY_DOCBASE_NAME=${CRYPTO_REGISTRY_DOCBASE_NAME}
+      - PRESETS_PREFERENCES_USER_PASSWORD=${PRESETS_PREFERENCES_USER_PASSWORD}
+      - APPSERVER_PORT=${APPSERVER_PORT}
+      - DFC_SESSION_SECURE_CONNECT_DEFAULT=${DFC_SESSION_SECURE_CONNECT_DEFAULT}
+    container_name:
+      "da"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - rcs
+    volumes:
+      - dalogs:/opt/tomcat/logs
+      - dacustom:/opt/tomcat/webapps/da/custom
+    privileged: true
+
+  lsd2config:
+    image: localhost:5000/lifescience/ubuntu/stateless/lsd2config:16.4.0000.0509
+    environment:
+      - DOCBROKER_HOST=${DOCBROKER_HOST}
+      - DOCBROKER_PORT=${DOCBROKER_PORT}
+      - METHOD_SVR_HOST=${METHOD_SVR_HOST}
+      - METHOD_SVR_PORT=${METHOD_SVR_PORT}
+      - GLOBAL_REGISTRY_DOCBASE_NAME=${GLOBAL_REGISTRY_DOCBASE_NAME}
+      - BOF_REGISTRY_USER_PASSWORD=${GLOBAL_REGISTRY_PASSWORD}
+      - CRYPTO_REGISTRY_DOCBASE_NAME=${CRYPTO_REGISTRY_DOCBASE_NAME}
+      - DFC_SESSION_SECURE_CONNECT_DEFAULT=${DFC_SESSION_SECURE_CONNECT_DEFAULT}
+      - INSTALL_OWNER=${INSTALL_OWNER}
+      - INSTALL_OWNER_PASSWORD=${INSTALL_OWNER_PASSWORD}
+      - DOCBASE_NAME=${DOCBASE_NAME}
+      - LIFESCIENCES_SOLUTION=${LIFESCIENCES_SOLUTION}      
+    hostname:
+      "lsd2config"
+    container_name:
+      "lsd2config"
+    ports:
+      - "8181:8080"
+    volumes:
+      - lsd2repo1_d2_install:/opt/D2CS-install
+      - d2config_config_files:/usr/local/tomcat/CustomConf
+      - d2config_logs:/usr/local/tomcat/webapps/D2-Config/logs
+      - lsd2config_ls_install:/opt/ls_install
+    privileged: true
+    depends_on:
+      - da
+
+  lsd2client:
+    image: localhost:5000/lifescience/ubuntu/stateless/lsd2client:16.4.0000.0509
+    environment:
+      - DOCBROKER_HOST=${DOCBROKER_HOST}
+      - DOCBROKER_PORT=${DOCBROKER_PORT}
+      - METHOD_SVR_HOST=${METHOD_SVR_HOST}
+      - METHOD_SVR_PORT=${METHOD_SVR_PORT}
+      - GLOBAL_REGISTRY_DOCBASE_NAME=${GLOBAL_REGISTRY_DOCBASE_NAME}
+      - BOF_REGISTRY_USER_PASSWORD=${GLOBAL_REGISTRY_PASSWORD}
+      - CRYPTO_REGISTRY_DOCBASE_NAME=${CRYPTO_REGISTRY_DOCBASE_NAME}
+      - DFC_SESSION_SECURE_CONNECT_DEFAULT=${DFC_SESSION_SECURE_CONNECT_DEFAULT}
+      - INSTALL_OWNER=${INSTALL_OWNER}
+      - INSTALL_OWNER_PASSWORD=${INSTALL_OWNER_PASSWORD}
+      - DOCBASE_NAME=${DOCBASE_NAME}
+      - LIFESCIENCES_SOLUTION=${LIFESCIENCES_SOLUTION}
+    hostname:
+      "lsd2client"
+    container_name:
+      "lsd2client"
+    ports:
+     - "8282:8080"
+    volumes:
+      - lsd2repo1_d2_install:/opt/D2CS-install
+      - d2client_config_files:/usr/local/tomcat/CustomConf
+      - d2client_logs:/usr/local/tomcat/webapps/D2/logs
+      - lsd2client_ls_install:/opt/ls_install
+      - lsd2client_war_files:/usr/local/tomcat/webapps
+    privileged: true
+    depends_on:
+      - lsd2config
+
+  lswebapps:
+    image: localhost:5000/lifescience/ubuntu/stateless/lswebapps:16.4.0000.0509
+    environment:
+      - DOCBROKER_HOST=${DOCBROKER_HOST}
+      - DOCBROKER_PORT=${DOCBROKER_PORT}
+      - METHOD_SVR_HOST=${METHOD_SVR_HOST}
+      - METHOD_SVR_PORT=${METHOD_SVR_PORT}
+      - GLOBAL_REGISTRY_DOCBASE_NAME=${GLOBAL_REGISTRY_DOCBASE_NAME}
+      - BOF_REGISTRY_USER_PASSWORD=${GLOBAL_REGISTRY_PASSWORD}
+      - CRYPTO_REGISTRY_DOCBASE_NAME=${CRYPTO_REGISTRY_DOCBASE_NAME}
+      - APPSERVER_PORT=${LS_WEBAPPS_APPSERVER_PORT}
+      - DFC_SESSION_SECURE_CONNECT_DEFAULT=${DFC_SESSION_SECURE_CONNECT_DEFAULT}
+      - CONTROLLED_PRINT_ADMIN_USER=${CONTROLLED_PRINT_ADMIN_USER}
+      - CONTROLLED_PRINT_ADMIN_USER_PASSWORD=${CONTROLLED_PRINT_ADMIN_USER_PASSWORD}
+    hostname:
+      "lswebapps"
+    container_name:
+      "lswebapps"
+    ports:
+      - "8383:8080"
+    volumes:
+      - lswebapps_config_files:/usr/local/tomcat/CustomConf
+      - lswebapps_logs:/usr/local/tomcat/webapps/ControlledPrint/logs
+      - lswebapps_ls_install:/opt/ls_install     
+    privileged: true
+    depends_on:
+      - lsd2client
+
+volumes:
+ postgres_db_data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/ichigo/postgres_db_data
+ lsd2repo1_data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/ichigo/lsd2repo1_data
+ xplore:
+   driver: local
+   driver_opts:
+      o: bind
+      type: none
+      device: /home/ichigo/lsd2repo1_xplore
+ 
+ lsd2repo1_share:
+ lsd2repo1_dba:
+ lsd2repo1_dfc:
+ lsd2repo1_odbc:
+ lsd2repo1_mdserver_conf:
+ lsd2repo1_mdserver_log:
+ lsd2repo1_mdserver_logs:
+ lsd2repo1_Thumbnail_Server_conf:
+ lsd2repo1_Thumbnail_Server_webinf:
+ lsd2repo1_XhiveConnector:
+    driver: local
+ lsd2repo1_xhive_storage:
+    driver: local
+ lsd2repo1_d2_install:
+ lsd2repo1_ServerApps:
+ lsd2repo1_acs:
+ lsd2repo1_bpm:
+ lsd2repo1_mdserver_modules_emc:
+ lsd2repo1_opt_opentext_d2:
+ lsd2repo1_install:
+ d2config_config_files:
+ d2config_logs:
+ d2client_config_files:
+ d2client_logs:
+ lswebapps_config_files:
+ lswebapps_logs:
+ lsd2config_ls_install:
+ lsd2client_ls_install:
+ lsd2client_war_files:
+ lswebapps_ls_install:
+ lsd2repo1_ls_install:
+ dalogs:
+ dacustom:
