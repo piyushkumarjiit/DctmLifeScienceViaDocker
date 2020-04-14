@@ -3,7 +3,7 @@ version: '3.3'
 services:
       
   xcp-cs-setup:
-    image: localhost:5000/xcp/centos/stateless/xcp-cs-setup:16.4.0110
+    image: localhost:5000/xcp/centos/stateless/xcp-pe-setup:16.4.1000.0070
     volumes:
       - ./xcp-extra-dars:/extra_dars
       - lsd2repo1_bpm:/cs-bpm
@@ -38,7 +38,7 @@ services:
       - DOCBASE_NAME=${DOCBASE_NAME}
 
   rcs:
-    image: localhost:5000/contentserver/centos/stateless/cs:16.4.0110
+    image: localhost:5000/contentserver/centos/stateless/cs:16.4.0110.0167
     environment:
       - DOCKER_HOST=${DCTM_DOCKER_HOST}
       - DATABASE_HOST=${DATABASE_HOST}
