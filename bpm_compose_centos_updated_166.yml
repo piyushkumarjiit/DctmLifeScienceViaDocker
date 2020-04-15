@@ -38,7 +38,7 @@ services:
       - DOCBASE_NAME=${DOCBASE_NAME}
 
   rcs:
-    image: localhost:5000/contentserver_centos/cs:16.4.0110.0167
+    image: localhost:5000/contentserver_centos/cs:16.4.0140.0202
     environment:
       - DOCKER_HOST=${DCTM_DOCKER_HOST}
       - DATABASE_HOST=${DATABASE_HOST}
