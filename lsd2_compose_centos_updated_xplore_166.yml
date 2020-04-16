@@ -15,7 +15,7 @@ services:
       - DOCBASE_NAME=${DOCBASE_NAME}
 
   rcs:
-    image: localhost:5000/lifescience/centos/stateless/lsd2cs:16.6.0000
+    image: localhost:5000/lifescience/centos/stateless/lsd2cs:16.6.0000.0169
     environment:
       - DOCKER_HOST=${DCTM_DOCKER_HOST}
       - DATABASE_HOST=${DATABASE_HOST}
@@ -71,7 +71,7 @@ services:
       - D2_CLIENT_URL=${D2_CLIENT_URL}
       - XMLVIEWER_URL=${XMLVIEWER_URL}
       - LIFESCIENCES_SOLUTION=${LIFESCIENCES_SOLUTION}
-      - CONFIGURE_OPENJDK=true
+      - CONFIGURE_OPENJDK=${CONFIGURE_OPENJDK}
     hostname:
       "lsd2cs"
     container_name:
@@ -169,7 +169,7 @@ services:
      - rcs
 
   lsd2config:
-    image: localhost:5000/lifescience/ubuntu/stateless/lsd2config:16.6.0000
+    image: localhost:5000/lifescience/ubuntu/stateless/lsd2config:16.6.0000.0169
     environment:
       - DOCBROKER_HOST=${DOCBROKER_HOST}
       - DOCBROKER_PORT=1689
@@ -199,7 +199,7 @@ services:
       - da
 
   lsd2client:
-    image: 10.194.42.173:5000/lifescience/ubuntu/stateless/lsd2client:16.6.0000
+    image: 10.194.42.173:5000/lifescience/ubuntu/stateless/lsd2client:16.6.0000.0169
     environment:
       - DOCBROKER_HOST=${DOCBROKER_HOST}
       - DOCBROKER_PORT=${DOCBROKER_PORT}
@@ -230,7 +230,7 @@ services:
       - lsd2config
 
   lswebapps:
-    image: localhost:5000/lifescience/ubuntu/stateless/lswebapps:16.6.0000
+    image: localhost:5000/lifescience/ubuntu/stateless/lswebapps:16.6.0000.0169
     environment:
       - DOCBROKER_HOST=${DOCBROKER_HOST}
       - DOCBROKER_PORT=${DOCBROKER_PORT}
