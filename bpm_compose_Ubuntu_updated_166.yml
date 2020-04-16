@@ -24,6 +24,7 @@ services:
       - JMS_PASSWORD=${JMS_PASSWORD}
       - DOCKER_HOST=${DCTM_DOCKER_HOST}
       - WILDFLY_VERSION=${WILDFLY_VERSION}
+      -JBOSS=${JBOSS}
     depends_on:
       - rcs
 

@@ -72,6 +72,8 @@ services:
       - XMLVIEWER_URL=${XMLVIEWER_URL}
       - LIFESCIENCES_SOLUTION=${LIFESCIENCES_SOLUTION}
       - CONFIGURE_OPENJDK=${CONFIGURE_OPENJDK}
+      - WILDFLY_VERSION=${WILDFLY_VERSION}
+      - JBOSS=${JBOSS}
     hostname:
       "lsd2cs"
     container_name:
