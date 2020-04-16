@@ -4,6 +4,8 @@ services:
       
   xcp-cs-setup:
     image: localhost:5000/xcp/centos/stateless/xcp-pe-setup:16.4.1000.0070
+    container_name:
+      "xcp"
     volumes:
       - ./xcp-extra-dars:/extra_dars
       - lsd2repo1_bpm:/cs-bpm
@@ -22,6 +24,8 @@ services:
       - JMS_PASSWORD=${JMS_PASSWORD}
       - DOCKER_HOST=${DCTM_DOCKER_HOST}
       - WILDFLY_VERSION=${WILDFLY_VERSION}
+    depends_on:
+      - rcs
 
   cs-db:
     image: postgres:9.6
