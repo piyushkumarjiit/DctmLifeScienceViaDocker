@@ -147,7 +147,7 @@ services:
      - xplore:/root/xPlore/rtdata
 
   da:
-    image: localhost:5000/da/centos/stateless/dastateless:16.4.0000.0048
+    image: localhost:5000/da/centos/stateless/da_centos:16.4.0000.0048
     environment:
       - DOCBROKER_IP=${DOCBROKER_HOST}
       - DOCBROKER_PORT=${DOCBROKER_PORT}
