@@ -201,7 +201,7 @@ services:
       - da
 
   lsd2client:
-    image: 10.194.42.173:5000/lifescience/ubuntu/stateless/lsd2client:16.6.0000.0169
+    image: localhost:5000/lifescience/ubuntu/stateless/lsd2client:16.6.0000.0169
     environment:
       - DOCBROKER_HOST=${DOCBROKER_HOST}
       - DOCBROKER_PORT=${DOCBROKER_PORT}
