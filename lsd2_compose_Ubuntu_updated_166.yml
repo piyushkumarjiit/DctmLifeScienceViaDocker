@@ -15,7 +15,7 @@ services:
       - DOCBASE_NAME=${DOCBASE_NAME}
 
   rcs:
-    image: localhost:5000/lifescience/centos/stateless/lsd2cs:16.6.0000.0169
+    image: localhost:5000/lifescience/ubuntu/stateless/lsd2cs:16.6.0000.0169
     environment:
       - DOCKER_HOST=${DCTM_DOCKER_HOST}
       - DATABASE_HOST=${DATABASE_HOST}
@@ -74,6 +74,7 @@ services:
       - CONFIGURE_OPENJDK=${CONFIGURE_OPENJDK}
       - WILDFLY_VERSION=${WILDFLY_VERSION}
       - JBOSS=${JBOSS}
+      - SERVICE_NAME=${SERVICE_NAME}
     hostname:
       "lsd2cs"
     container_name:
