@@ -3,7 +3,7 @@ version: '3.3'
 services:
       
   xcp-cs-setup:
-    image: localhost:5000/xcp/centos/stateless/xcp-pe-setup:16.4.1000.0070
+    image: localhost:5000/xcp/centos/stateless/xcp-cs-setup:16.4.0010.0120
     container_name:
       "xcp"
     volumes:
@@ -25,6 +25,7 @@ services:
       - DOCKER_HOST=${DCTM_DOCKER_HOST}
       - WILDFLY_VERSION=${WILDFLY_VERSION}
       - JBOSS=${JBOSS}
+      - SERVICE_NAME=${SERVICE_NAME}
     depends_on:
       - rcs
 
