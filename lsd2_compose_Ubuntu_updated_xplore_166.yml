@@ -114,7 +114,7 @@ services:
       - cs-db
 
  xplore:
-   image: localhost:5000/xplore/ubuntu/stateless/xplore:16.4.0000.0197
+   image: localhost:5000/xplore_ubuntu:16.4.0000.0197
    hostname: xplore
    container_name:
      "xplore"
@@ -127,7 +127,7 @@ services:
      - xplore:/root/xPlore/rtdata
   
  indexagent:
-   image: localhost:5000/indexagent/ubuntu/stateless/indexagent:16.4.0000.0197
+   image: localhost:5000/indexagent_ubuntu:16.4.0000.0197
    hostname: indexagent
    container_name:
      "indexagent"
