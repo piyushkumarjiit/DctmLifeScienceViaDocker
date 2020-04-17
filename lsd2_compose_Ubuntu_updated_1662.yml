@@ -15,7 +15,7 @@ services:
       - DOCBASE_NAME=${DOCBASE_NAME}
 
   rcs:
-    image: localhost:5000/lifescience/ubuntu/stateless/lsd2cs:16.6.0020.0214
+    image: localhost:5000/lsd2cs_docker_ubuntu:16.6.0020.0214
     environment:
       - DOCKER_HOST=${DCTM_DOCKER_HOST}
       - DATABASE_HOST=${DATABASE_HOST}
