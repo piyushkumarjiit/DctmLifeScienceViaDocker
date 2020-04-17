@@ -74,6 +74,7 @@ services:
       - CONFIGURE_OPENJDK=${CONFIGURE_OPENJDK}
       - WILDFLY_VERSION=${WILDFLY_VERSION}
       - JBOSS=${JBOSS}
+      - SERVICE_NAME=${SERVICE_NAME}
     hostname:
       "lsd2cs"
     container_name:
@@ -113,7 +114,7 @@ services:
       - cs-db
 
  xplore:
-   image: localhost:5000/xplore/ubuntu/stateless/xplore:16.4.0000
+   image: localhost:5000/xplore/ubuntu/stateless/xplore:16.4.0000.0197
    hostname: xplore
    container_name:
      "xplore"
@@ -126,7 +127,7 @@ services:
      - xplore:/root/xPlore/rtdata
   
  indexagent:
-   image: localhost:5000/indexagent/ubuntu/stateless/indexagent:16.4.0000
+   image: localhost:5000/indexagent/ubuntu/stateless/indexagent:16.4.0000.0197
    hostname: indexagent
    container_name:
      "indexagent"

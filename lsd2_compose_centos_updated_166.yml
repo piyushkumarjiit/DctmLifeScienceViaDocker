@@ -74,6 +74,7 @@ services:
       - CONFIGURE_OPENJDK=${CONFIGURE_OPENJDK}
       - WILDFLY_VERSION=${WILDFLY_VERSION}
       - JBOSS=${JBOSS}
+      - SERVICE_NAME=${SERVICE_NAME}
     hostname:
       "lsd2cs"
     container_name:
