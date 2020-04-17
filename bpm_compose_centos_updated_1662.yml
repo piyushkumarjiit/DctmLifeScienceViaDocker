@@ -3,7 +3,7 @@ version: '3.3'
 services:
       
   xcp-cs-setup:
-    image: localhost:5000/xcp/centos/stateless/xcp-cs-setup:16.4.0010.0120
+    image: localhost:5000/xcp/centos/stateless/xcp-cs-setup:16.4.0110.0136
     container_name:
       "xcp"
     volumes:
@@ -12,6 +12,8 @@ services:
       - lsd2repo1_dba:/cs-dba:ro
       - lsd2repo1_mdserver_conf:/cs-mdserver-conf
     environment:
+      - INSTALL_OWNER=${INSTALL_OWNER}
+      - INSTALL_OWNER_PASSWORD=${INSTALL_OWNER_PASSWORD}
       - DOCBASE_NAME=${DOCBASE_NAME}
       - DOCBASE_OWNER=${DOCBASE_OWNER}
       - DOCBASE_OWNER_PASSWORD=${INSTALL_OWNER_PASSWORD}
