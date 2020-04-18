@@ -1,4 +1,5 @@
 version: '3.3'
+
 services:
   cs-db:
     image: postgres:9.6
