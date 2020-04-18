@@ -114,7 +114,7 @@ services:
     depends_on:
       - cs-db
 
- xplore:
+  xplore:
    image: localhost:5000/xplore_ubuntu:16.4.0000.0197
    hostname: xplore
    container_name:
@@ -127,7 +127,7 @@ services:
    volumes:
      - xplore:/root/xPlore/rtdata
   
- indexagent:
+  indexagent:
    image: localhost:5000/indexagent_ubuntu:16.4.0000.0197
    hostname: indexagent
    container_name:
