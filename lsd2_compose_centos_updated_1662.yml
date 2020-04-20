@@ -101,8 +101,7 @@ services:
      - lsd2repo1_Thumbnail_Server_webinf:/opt/dctm/product/16.3/thumbsrv/container/webapps/thumbsrv/WEB-INF
      - lsd2repo1_xhive_storage:/opt/dctm/xhive_storage
      - lsd2repo1_XhiveConnector:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/XhiveConnector.ear
-     - lsd2repo1_d2_install:/opt/D2-install
-     - lsd2repo1_d2cs_install:/opt/D2CS-install
+     - lsd2repo1_d2_install:/opt/D2CS-install
      - lsd2repo1_ServerApps:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/ServerApps.ear
      - lsd2repo1_acs:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/acs.ear
      - lsd2repo1_bpm:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/bpm.ear
