@@ -102,6 +102,7 @@ services:
      - lsd2repo1_xhive_storage:/opt/dctm/xhive_storage
      - lsd2repo1_XhiveConnector:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/XhiveConnector.ear
      - lsd2repo1_d2_install:/opt/D2-install
+     - lsd2repo1_d2cs_install:/opt/D2CS-install
      - lsd2repo1_ServerApps:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/ServerApps.ear
      - lsd2repo1_acs:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/acs.ear
      - lsd2repo1_bpm:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/bpm.ear
@@ -261,6 +262,7 @@ volumes:
     driver: local
  lsd2repo1_xhive_storage:
     driver: local
+ lsd2repo1_d2_install:
  lsd2repo1_d2_install:
  lsd2repo1_ServerApps:
  lsd2repo1_acs:
