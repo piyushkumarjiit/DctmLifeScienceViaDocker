@@ -80,36 +80,35 @@ services:
     container_name:
       "lsd2cs"
     ports:
-     - "1689:1689"
-     - "1690:1690"
-     - "50000:50000"
-     - "50001:50001"
-     - "9080:9080"
-     - "9082:9082"
-     - "9081:9081"
-     - "9084:9084"
+      - "1689:1689"
+      - "1690:1690"
+      - "50000:50000"
+      - "50001:50001"
+      - "9080:9080"
+      - "9082:9082"
+      - "9081:9081"
+      - "9084:9084"
     volumes:
-     - lsd2repo1_odbc:/opt/dctm/odbc
-     - lsd2repo1_data:/opt/dctm/data
-     - lsd2repo1_dba:/opt/dctm/dba
-     - lsd2repo1_share:/opt/dctm/share
-     - lsd2repo1_dfc:/opt/dctm/config
-     - lsd2repo1_mdserver_conf:/opt/dctm/mdserver_conf
-     - lsd2repo1_mdserver_log:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/log
-     - lsd2repo1_mdserver_logs:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/logs
-     - lsd2repo1_Thumbnail_Server_conf:/opt/dctm/product/16.3/thumbsrv/conf
-     - lsd2repo1_Thumbnail_Server_webinf:/opt/dctm/product/16.3/thumbsrv/container/webapps/thumbsrv/WEB-INF
-     - lsd2repo1_xhive_storage:/opt/dctm/xhive_storage
-     - lsd2repo1_XhiveConnector:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/XhiveConnector.ear
-     - lsd2repo1_d2_install:/opt/D2-install
-     - lsd2repo1_d2cs_install:/opt/D2CS-install
-     - lsd2repo1_ServerApps:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/ServerApps.ear
-     - lsd2repo1_acs:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/acs.ear
-     - lsd2repo1_bpm:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/bpm.ear
-     - lsd2repo1_mdserver_modules_emc:/opt/dctm/wildfly11.0.0/modules/system/layers/base/emc
-     - lsd2repo1_opt_opentext_d2:/opt/OpenText/D2
-     - lsd2repo1_install:/opt/dctm/product/16.4/install/logs
-     - lsd2repo1_ls_install:/opt/ls_install
+      - lsd2repo1_odbc:/opt/dctm/odbc
+      - lsd2repo1_data:/opt/dctm/data
+      - lsd2repo1_dba:/opt/dctm/dba
+      - lsd2repo1_share:/opt/dctm/share
+      - lsd2repo1_dfc:/opt/dctm/config
+      - lsd2repo1_mdserver_conf:/opt/dctm/mdserver_conf
+      - lsd2repo1_mdserver_log:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/log
+      - lsd2repo1_mdserver_logs:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/logs
+      - lsd2repo1_Thumbnail_Server_conf:/opt/dctm/product/16.3/thumbsrv/conf
+      - lsd2repo1_Thumbnail_Server_webinf:/opt/dctm/product/16.3/thumbsrv/container/webapps/thumbsrv/WEB-INF
+      - lsd2repo1_xhive_storage:/opt/dctm/xhive_storage
+      - lsd2repo1_XhiveConnector:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/XhiveConnector.ear
+      - lsd2repo1_d2_install:/opt/D2CS-install
+      - lsd2repo1_ServerApps:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/ServerApps.ear
+      - lsd2repo1_acs:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/acs.ear
+      - lsd2repo1_bpm:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/bpm.ear
+      - lsd2repo1_mdserver_modules_emc:/opt/dctm/wildfly11.0.0/modules/system/layers/base/emc
+      - lsd2repo1_opt_opentext_d2:/opt/OpenText/D2
+      - lsd2repo1_install:/opt/dctm/product/16.4/install/logs
+      - lsd2repo1_ls_install:/opt/ls_install
     privileged: true
     depends_on:
       - cs-db
@@ -135,14 +134,14 @@ services:
     ports:
       - "9200:9200"
     environment:
-     - primary_addr=${XPLORE_PRIMARY_ADDRESS}
-     - docbase_name=${DOCBASE_NAME}
-     - docbase_user=${DOCBASE_USER}
-     - docbase_password=${DOCBASE_PASSWORD}
-     - broker_host=${DOCBROKER_HOST}
-     - broker_port=${DOCBROKER_PORT}
-     - registry_name=${DOCBASE_NAME}
-     - registry_user=${GLOBAL_REGISTRY_USER}
+      - primary_addr=${XPLORE_PRIMARY_ADDRESS}
+      - docbase_name=${DOCBASE_NAME}
+      - docbase_user=${DOCBASE_USER}
+      - docbase_password=${DOCBASE_PASSWORD}
+      - broker_host=${DOCBROKER_HOST}
+      - broker_port=${DOCBROKER_PORT}
+      - registry_name=${DOCBASE_NAME}
+      - registry_user=${GLOBAL_REGISTRY_USER}
       - registry_password=${GLOBAL_REGISTRY_PASSWORD}
     depends_on:
       - xplore
@@ -154,59 +153,58 @@ services:
   da:
     image: localhost:5000/da_centos:16.4.0170.0024
     environment:     
-     - DA_EXT_CONF=/opt/tomcat/webapps/da/external-configurations
-     - PREFERPASS=webtop
-     - PRESETPASS=webtop
-     - OTDS_PROPERTIES=otds_url=<OTDS_APP_URL>::client_id=<OTDS_CLIENT_ID>::client_secret=<OTDS_CLIENT_SECRET>::redirect_uri=<DA_APP_URI>
-     - APP_PROPERTIES=application.authentication.otds_sso.enabled=false::application.authentication.otds_sso.repo_selection_page_required=false::application.authentication.otds_sso.dm_login_ticket_timeout=250
-     - DFC_PROPERTIES=dfc.data.dir=opt/dctm::dfc.tokenstorage.dir=opt/dctm::dfc.tokenstorage.enable=false::dfc.docbroker.host[0]=10.194.40.179::dfc.docbroker.port[0]=1689::dfc.globalregistry.repository=lsd2repo1::dfc.globalregistry.username=dm_bof_registry::dfc.globalregistry.password=${GLOBAL_REGISTRY_PASSWORD}                    
-     - DOCBROKER_IP=${DOCBROKER_HOST}
-     - DOCBROKER_PORT=${DOCBROKER_PORT}
-     - GLOBAL_REGISTRY_DOCBASE_NAME=${GLOBAL_REGISTRY_DOCBASE_NAME}
-     - BOF_REGISTRY_USER_PASSWORD=${GLOBAL_REGISTRY_PASSWORD}
-     - CRYPTO_REGISTRY_DOCBASE_NAME=${CRYPTO_REGISTRY_DOCBASE_NAME}
-     - PRESETS_PREFERENCES_USER_PASSWORD=${PRESETS_PREFERENCES_USER_PASSWORD}
-     - APPSERVER_PORT=${APPSERVER_PORT}
-     - DFC_SESSION_SECURE_CONNECT_DEFAULT=${DFC_SESSION_SECURE_CONNECT_DEFAULT}
+      - DA_EXT_CONF=/opt/tomcat/webapps/da/external-configurations
+      - PREFERPASS=webtop
+      - PRESETPASS=webtop
+      - OTDS_PROPERTIES=otds_url=<OTDS_APP_URL>::client_id=<OTDS_CLIENT_ID>::client_secret=<OTDS_CLIENT_SECRET>::redirect_uri=<DA_APP_URI>
+      - APP_PROPERTIES=application.authentication.otds_sso.enabled=false::application.authentication.otds_sso.repo_selection_page_required=false::application.authentication.otds_sso.dm_login_ticket_timeout=250
+      - DFC_PROPERTIES=dfc.data.dir=opt/dctm::dfc.tokenstorage.dir=opt/dctm::dfc.tokenstorage.enable=false::dfc.docbroker.host[0]=10.194.40.179::dfc.docbroker.port[0]=1689::dfc.globalregistry.repository=lsd2repo1::dfc.globalregistry.username=dm_bof_registry::dfc.globalregistry.password=${GLOBAL_REGISTRY_PASSWORD}                    
+      - DOCBROKER_IP=${DOCBROKER_HOST}
+      - DOCBROKER_PORT=${DOCBROKER_PORT}
+      - GLOBAL_REGISTRY_DOCBASE_NAME=${GLOBAL_REGISTRY_DOCBASE_NAME}
+      - BOF_REGISTRY_USER_PASSWORD=${GLOBAL_REGISTRY_PASSWORD}
+      - CRYPTO_REGISTRY_DOCBASE_NAME=${CRYPTO_REGISTRY_DOCBASE_NAME}
+      - PRESETS_PREFERENCES_USER_PASSWORD=${PRESETS_PREFERENCES_USER_PASSWORD}
+      - APPSERVER_PORT=${APPSERVER_PORT}
+      - DFC_SESSION_SECURE_CONNECT_DEFAULT=${DFC_SESSION_SECURE_CONNECT_DEFAULT}
     container_name:
       "da"
     ports:
-     - "8080:8080"
+      - "8080:8080"
     volumes:
-     - ext-conf:/opt/tomcat/webapps/da/external-configurations    
-     - dalogs:/opt/tomcat/logs
-     - dacustom:/opt/tomcat/webapps/da/custom
+      - ext-conf:/opt/tomcat/webapps/da/external-configurations    
+      - dalogs:/opt/tomcat/logs
+      - dacustom:/opt/tomcat/webapps/da/custom
     privileged: true
     depends_on:
-     - rcs
+      - rcs
 
   lsd2config:
     image: localhost:5000/lsd2config_docker_centos:16.6.1000.0126 
     environment:
       - DOCBROKER_HOST=${DOCBROKER_HOST}
-      - DOCBROKER_PORT=1689
-      - METHOD_SVR_HOST=${DOCBROKER_HOST}
-      - METHOD_SVR_PORT=9080
-      - GLOBAL_REGISTRY_DOCBASE_NAME=lsd2repo1
+      - DOCBROKER_PORT=${DOCBROKER_PORT}
+      - METHOD_SVR_HOST=${METHOD_SVR_HOST}
+      - METHOD_SVR_PORT=${METHOD_SVR_PORT}
+      - GLOBAL_REGISTRY_DOCBASE_NAME=${GLOBAL_REGISTRY_DOCBASE_NAME}
       - BOF_REGISTRY_USER_PASSWORD=${GLOBAL_REGISTRY_PASSWORD}
-      - CRYPTO_REGISTRY_DOCBASE_NAME=lsd2repo1
-      - DFC_SESSION_SECURE_CONNECT_DEFAULT=try_secure_first
-      - INSTALL_OWNER=dmadmin
+      - CRYPTO_REGISTRY_DOCBASE_NAME=${CRYPTO_REGISTRY_DOCBASE_NAME}
+      - DFC_SESSION_SECURE_CONNECT_DEFAULT=${DFC_SESSION_SECURE_CONNECT_DEFAULT}
+      - INSTALL_OWNER=${INSTALL_OWNER}
       - INSTALL_OWNER_PASSWORD=${INSTALL_OWNER_PASSWORD}
-      - DOCBASE_NAME=lsd2repo1
-      - LIFESCIENCES_SOLUTION=LSSuite
+      - DOCBASE_NAME=${DOCBASE_NAME}
+      - LIFESCIENCES_SOLUTION=${LIFESCIENCES_SOLUTION} 
     hostname:
       "lsd2config"
     container_name:
       "lsd2config"
     ports:
-     - "8181:8080"
+      - "8181:8080"
     volumes:
-     - lsd2repo1_d2cs_install:/opt/D2CS-install
-     - lsd2repo1_d2_install:/opt/D2-install
-     - d2config_config_files:/usr/local/tomcat/CustomConf
-     - d2config_logs:/usr/local/tomcat/webapps/D2-Config/logs
-     - lsd2config_ls_install:/opt/ls_install
+      - lsd2repo1_d2_install:/opt/D2CS-install
+      - d2config_config_files:/usr/local/tomcat/CustomConf
+      - d2config_logs:/usr/local/tomcat/webapps/D2-Config/logs
+      - lsd2config_ls_install:/opt/ls_install
     privileged: true
     depends_on:
       - da
@@ -231,14 +229,13 @@ services:
     container_name:
       "lsd2client"
     ports:
-     - "8282:8080"
+      - "8282:8080"
     volumes:
-     - lsd2repo1_d2cs_install:/opt/D2CS-install
-     - lsd2repo1_d2_install:/opt/D2-install
-     - d2client_config_files:/usr/local/tomcat/CustomConf
-     - d2client_logs:/usr/local/tomcat/webapps/D2/logs
-     - lsd2client_ls_install:/opt/ls_install
-     - lsd2client_war_files:/usr/local/tomcat/webapps
+      - lsd2repo1_d2_install:/opt/D2CS-install
+      - d2client_config_files:/usr/local/tomcat/CustomConf
+      - d2client_logs:/usr/local/tomcat/webapps/D2/logs
+      - lsd2client_ls_install:/opt/ls_install
+      - lsd2client_war_files:/usr/local/tomcat/webapps
     privileged: true
     depends_on:
       - lsd2config
@@ -265,11 +262,11 @@ services:
     container_name:
       "lswebapps"
     ports:
-     - "8383:8080"
+      - "8383:8080"
     volumes:
-     - lswebapps_config_files:/usr/local/tomcat/CustomConf
-     - lswebapps_logs:/usr/local/tomcat/webapps/ControlledPrint/logs
-     - lswebapps_ls_install:/opt/ls_install     
+      - lswebapps_config_files:/usr/local/tomcat/CustomConf
+      - lswebapps_logs:/usr/local/tomcat/webapps/ControlledPrint/logs
+      - lswebapps_ls_install:/opt/ls_install     
     privileged: true
     depends_on:
       - lsd2client
