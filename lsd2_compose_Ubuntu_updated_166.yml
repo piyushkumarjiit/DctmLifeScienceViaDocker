@@ -101,8 +101,7 @@ services:
      - lsd2repo1_Thumbnail_Server_webinf:/opt/dctm/product/16.3/thumbsrv/container/webapps/thumbsrv/WEB-INF
      - lsd2repo1_xhive_storage:/opt/dctm/xhive_storage
      - lsd2repo1_XhiveConnector:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/XhiveConnector.ear
-     - lsd2repo1_d2_install:/opt/D2-install
-     - lsd2repo1_d2cs_install:/opt/D2CS-install
+     - lsd2repo1_d2_install:/opt/D2CS-install
      - lsd2repo1_ServerApps:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/ServerApps.ear
      - lsd2repo1_acs:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/acs.ear
      - lsd2repo1_bpm:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/bpm.ear
@@ -140,17 +139,17 @@ services:
     image: localhost:5000/lifescience/ubuntu/stateless/lsd2config:16.6.0000.0169
     environment:
       - DOCBROKER_HOST=${DOCBROKER_HOST}
-      - DOCBROKER_PORT=1689
-      - METHOD_SVR_HOST=${DOCBROKER_HOST}
-      - METHOD_SVR_PORT=9080
-      - GLOBAL_REGISTRY_DOCBASE_NAME=lsd2repo1
+      - DOCBROKER_PORT=${DOCBROKER_PORT}
+      - METHOD_SVR_HOST=${METHOD_SVR_HOST}
+      - METHOD_SVR_PORT=${METHOD_SVR_PORT}
+      - GLOBAL_REGISTRY_DOCBASE_NAME=${GLOBAL_REGISTRY_DOCBASE_NAME}
       - BOF_REGISTRY_USER_PASSWORD=${GLOBAL_REGISTRY_PASSWORD}
-      - CRYPTO_REGISTRY_DOCBASE_NAME=lsd2repo1
-      - DFC_SESSION_SECURE_CONNECT_DEFAULT=try_secure_first
-      - INSTALL_OWNER=dmadmin
+      - CRYPTO_REGISTRY_DOCBASE_NAME=${CRYPTO_REGISTRY_DOCBASE_NAME}
+      - DFC_SESSION_SECURE_CONNECT_DEFAULT=${DFC_SESSION_SECURE_CONNECT_DEFAULT}
+      - INSTALL_OWNER=${INSTALL_OWNER}
       - INSTALL_OWNER_PASSWORD=${INSTALL_OWNER_PASSWORD}
-      - DOCBASE_NAME=lsd2repo1
-      - LIFESCIENCES_SOLUTION=LSSuite      
+      - DOCBASE_NAME=${DOCBASE_NAME}
+      - LIFESCIENCES_SOLUTION=${LIFESCIENCES_SOLUTION}      
     hostname:
       "lsd2config"
     container_name:
@@ -158,8 +157,7 @@ services:
     ports:
      - "8181:8080"
     volumes:
-     - lsd2repo1_d2_install:/opt/D2-install
-     - lsd2repo1_d2cs_install:/opt/D2CS-install
+     - lsd2repo1_d2_install:/opt/D2CS-install
      - d2config_config_files:/usr/local/tomcat/CustomConf
      - d2config_logs:/usr/local/tomcat/webapps/D2-Config/logs
      - lsd2config_ls_install:/opt/ls_install
@@ -189,8 +187,7 @@ services:
     ports:
      - "8282:8080"
     volumes:
-     - lsd2repo1_d2_install:/opt/D2-install
-     - lsd2repo1_d2cs_install:/opt/D2CS-install
+     - lsd2repo1_d2_install:/opt/D2CS-install
      - d2client_config_files:/usr/local/tomcat/CustomConf
      - d2client_logs:/usr/local/tomcat/webapps/D2/logs
      - lsd2client_ls_install:/opt/ls_install
@@ -213,7 +210,7 @@ services:
       - BOF_REGISTRY_USER_PASSWORD=${GLOBAL_REGISTRY_PASSWORD}
       - CRYPTO_REGISTRY_DOCBASE_NAME=${CRYPTO_REGISTRY_DOCBASE_NAME}
       - APPSERVER_PORT=${LS_WEBAPPS_APPSERVER_PORT}
-      - DFC_SESSION_SECURE_CONNECT_DEFAULT=try_secure_first
+      - DFC_SESSION_SECURE_CONNECT_DEFAULT=${DFC_SESSION_SECURE_CONNECT_DEFAULT}
       - CONTROLLED_PRINT_ADMIN_USER=${CONTROLLED_PRINT_ADMIN_USER}
       - CONTROLLED_PRINT_ADMIN_USER_PASSWORD=${CONTROLLED_PRINT_ADMIN_USER_PASSWORD}
     hostname:
@@ -265,7 +262,6 @@ volumes:
  lsd2repo1_xhive_storage:
     driver: local
  lsd2repo1_d2_install:
- lsd2repo1_d2cs_install:
  lsd2repo1_ServerApps:
  lsd2repo1_acs:
  lsd2repo1_bpm:
