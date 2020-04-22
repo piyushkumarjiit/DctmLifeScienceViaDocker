@@ -76,6 +76,7 @@ services:
       - WILDFLY_VERSION=${WILDFLY_VERSION}
       - JBOSS=${JBOSS}
       - SERVICE_NAME=${SERVICE_NAME}
+      - D2_INSTALL_FILE_DIR=${D2_INSTALL_FILE_DIR}
     hostname:
       "lsd2cs"
     container_name:
@@ -186,7 +187,7 @@ services:
       - INSTALL_OWNER=${INSTALL_OWNER}
       - INSTALL_OWNER_PASSWORD=${INSTALL_OWNER_PASSWORD}
       - DOCBASE_NAME=${DOCBASE_NAME}
-      - LIFESCIENCES_SOLUTION=${LIFESCIENCES_SOLUTION}      
+      - LIFESCIENCES_SOLUTION=${LIFESCIENCES_SOLUTION} 
     hostname:
       "lsd2config"
     container_name:
@@ -216,7 +217,7 @@ services:
       - INSTALL_OWNER=${INSTALL_OWNER}
       - INSTALL_OWNER_PASSWORD=${INSTALL_OWNER_PASSWORD}
       - DOCBASE_NAME=${DOCBASE_NAME}
-      - LIFESCIENCES_SOLUTION=${LIFESCIENCES_SOLUTION} 
+      - LIFESCIENCES_SOLUTION=${LIFESCIENCES_SOLUTION}
     hostname:
       "lsd2client"
     container_name:
