@@ -116,11 +116,11 @@ services:
     image: localhost:5000/da_centos:16.4.0170.0024
     environment:     
       - DA_EXT_CONF=/opt/tomcat/webapps/da/external-configurations
-      - PREFERPASS=webtop
-      - PRESETPASS=webtop
+      - PREFERPASS=${PRESETS_PREFERENCES_USER_PASSWORD}
+      - PRESETPASS=${PRESETS_PREFERENCES_USER_PASSWORD}
       - OTDS_PROPERTIES=otds_url=<OTDS_APP_URL>::client_id=<OTDS_CLIENT_ID>::client_secret=<OTDS_CLIENT_SECRET>::redirect_uri=<DA_APP_URI>
       - APP_PROPERTIES=application.authentication.otds_sso.enabled=false::application.authentication.otds_sso.repo_selection_page_required=false::application.authentication.otds_sso.dm_login_ticket_timeout=250
-      - DFC_PROPERTIES=dfc.data.dir=opt/dctm::dfc.tokenstorage.dir=opt/dctm::dfc.tokenstorage.enable=false::dfc.docbroker.host[0]=10.194.40.179::dfc.docbroker.port[0]=1689::dfc.globalregistry.repository=lsd2repo1::dfc.globalregistry.username=dm_bof_registry::dfc.globalregistry.password=${GLOBAL_REGISTRY_PASSWORD}                    
+      - DFC_PROPERTIES=dfc.data.dir=opt/dctm::dfc.tokenstorage.dir=opt/dctm::dfc.tokenstorage.enable=false::dfc.docbroker.host[0]=${DOCBROKER_HOST}::dfc.docbroker.port[0]=${DOCBROKER_PORT}::dfc.globalregistry.repository=lsd2repo1::dfc.globalregistry.username=dm_bof_registry::dfc.globalregistry.password=${GLOBAL_REGISTRY_PASSWORD}                    
       - DOCBROKER_IP=${DOCBROKER_HOST}
       - DOCBROKER_PORT=${DOCBROKER_PORT}
       - GLOBAL_REGISTRY_DOCBASE_NAME=${GLOBAL_REGISTRY_DOCBASE_NAME}
