@@ -3,7 +3,7 @@ version: '3.3'
 services:
       
   xcp-cs-setup:
-    image: localhost:5000/xcp/centos/stateless/xcp-pe-setup:16.4.1040
+    image: localhost:5000/xcp/centos/stateless/xcp-pe-setup:16.4.1040.0131
     container_name:
       "xcp"
     volumes:
