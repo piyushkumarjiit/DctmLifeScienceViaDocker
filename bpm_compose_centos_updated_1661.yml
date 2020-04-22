@@ -41,7 +41,7 @@ services:
     container_name:
       "postgres"
     ports:
-     - "5432:5432"
+      - "5432:5432"
     volumes:
       - ./postgres:/docker-entrypoint-initdb.d
       - postgres_db_data:/var/lib/postgresql/data
@@ -53,7 +53,7 @@ services:
   rcs:
     image: localhost:5000/contentserver_centos:16.4.0170.0234
     environment:
-     - DOCKER_HOST=${DCTM_DOCKER_HOST}
+      - DOCKER_HOST=${DCTM_DOCKER_HOST}
       - DATABASE_HOST=${DATABASE_HOST}
       - DATABASE_USER=${DATABASE_USER}
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
@@ -106,29 +106,29 @@ services:
     container_name:
       "lsd2cs"
     ports:
-     - "1689:1689"
-     - "1690:1690"
-     - "50000:50000"
-     - "50001:50001"
-     - "9080:9080"
-     - "9082:9082"
-     - "9081:9081"
-     - "9084:9084"
+      - "1689:1689"
+      - "1690:1690"
+      - "50000:50000"
+      - "50001:50001"
+      - "9080:9080"
+      - "9082:9082"
+      - "9081:9081"
+      - "9084:9084"
     volumes:
-     - lsd2repo1_odbc:/opt/dctm/odbc
-     - lsd2repo1_data:/opt/dctm/data
-     - lsd2repo1_dba:/opt/dctm/dba
-     - lsd2repo1_share:/opt/dctm/share
-     - lsd2repo1_dfc:/opt/dctm/config
-     - lsd2repo1_mdserver_conf:/opt/dctm/mdserver_conf
-     - lsd2repo1_mdserver_log:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/log
-     - lsd2repo1_mdserver_logs:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/logs
-     - lsd2repo1_Thumbnail_Server_conf:/opt/dctm/product/16.3/thumbsrv/conf
-     - lsd2repo1_Thumbnail_Server_webinf:/opt/dctm/product/16.3/thumbsrv/container/webapps/thumbsrv/WEB-INF
-     - lsd2repo1_xhive_storage:/opt/dctm/xhive_storage
-     - lsd2repo1_XhiveConnector:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/XhiveConnector.ear
-     - lsd2repo1_bpm:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/bpm.ear
-     - lsd2repo1_install:/opt/dctm/product/16.4/install/logs
+      - lsd2repo1_odbc:/opt/dctm/odbc
+      - lsd2repo1_data:/opt/dctm/data
+      - lsd2repo1_dba:/opt/dctm/dba
+      - lsd2repo1_share:/opt/dctm/share
+      - lsd2repo1_dfc:/opt/dctm/config
+      - lsd2repo1_mdserver_conf:/opt/dctm/mdserver_conf
+      - lsd2repo1_mdserver_log:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/log
+      - lsd2repo1_mdserver_logs:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/logs
+      - lsd2repo1_Thumbnail_Server_conf:/opt/dctm/product/16.3/thumbsrv/conf
+      - lsd2repo1_Thumbnail_Server_webinf:/opt/dctm/product/16.3/thumbsrv/container/webapps/thumbsrv/WEB-INF
+      - lsd2repo1_xhive_storage:/opt/dctm/xhive_storage
+      - lsd2repo1_XhiveConnector:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/XhiveConnector.ear
+      - lsd2repo1_bpm:/opt/dctm/wildfly11.0.0/server/DctmServer_MethodServer/deployments/bpm.ear
+      - lsd2repo1_install:/opt/dctm/product/16.4/install/logs
     privileged: true
     depends_on:
       - cs-db
