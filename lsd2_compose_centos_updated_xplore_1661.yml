@@ -151,7 +151,7 @@ services:
 
 
   da:
-    image: localhost:5000/da_centos:16.4.0170.0024
+    image: localhost:5000/da_centos:16.4.0170.0027
     environment:     
       - DA_EXT_CONF=/opt/tomcat/webapps/da/external-configurations
       - PREFERPASS=${PRESETS_PREFERENCES_USER_PASSWORD}
