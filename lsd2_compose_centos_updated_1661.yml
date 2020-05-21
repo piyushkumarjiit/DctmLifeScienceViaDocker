@@ -239,19 +239,19 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /home/ichigo/postgres_db_data
+      device: ###TargetFolderLocation###/postgres_db_data
  lsd2repo1_data:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: /home/ichigo/lsd2repo1_data
+      device: ###TargetFolderLocation###/lsd2repo1_data
  xplore:
    driver: local
    driver_opts:
       o: bind
       type: none
-      device: /home/ichigo/lsd2repo1_xplore
+      device: ###TargetFolderLocation###/lsd2repo1_xplore
  
  lsd2repo1_share:
     driver: local

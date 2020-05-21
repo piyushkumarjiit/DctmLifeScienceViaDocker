@@ -138,19 +138,19 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /home/ichigo/postgres_db_data
+      device: ###TargetFolderLocation###/postgres_db_data
  xcp-extra-dars:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: /home/ichigo/xcp-extra-dars
+      device: ###TargetFolderLocation###/xcp-extra-dars
  lsd2repo1_data:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: /home/ichigo/lsd2repo1_data
+      device: ###TargetFolderLocation###/lsd2repo1_data
  lsd2repo1_share:
     driver: local
  lsd2repo1_dba:
