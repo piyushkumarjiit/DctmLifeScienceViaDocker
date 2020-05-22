@@ -239,19 +239,19 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: ###TargetFolderLocation###/postgres_db_data
+      device: TargetF0lderL0cati0n/postgres_db_data
  lsd2repo1_data:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: ###TargetFolderLocation###/lsd2repo1_data
+      device: TargetF0lderL0cati0n/lsd2repo1_data
  xplore:
    driver: local
    driver_opts:
       o: bind
       type: none
-      device: ###TargetFolderLocation###/lsd2repo1_xplore
+      device: TargetF0lderL0cati0n/lsd2repo1_xplore
  
  lsd2repo1_share:
     driver: local
