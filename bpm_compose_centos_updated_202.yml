@@ -1,0 +1,171 @@
+version: '3.3'
+
+services:
+      
+  xcp-cs-setup:
+    image: localhost:5000/xcp/centos/stateless/xcp-pe-setup:20.2.0000.0045
+    container_name:
+      "xcp"
+    volumes:
+      - ./xcp-extra-dars:/extra_dars
+      - lsd2repo1_bpm:/cs-bpm
+      - lsd2repo1_dba:/cs-dba:ro
+      - lsd2repo1_mdserver_conf:/cs-mdserver-conf
+    environment:
+      - INSTALL_OWNER=${INSTALL_OWNER}
+      - INSTALL_OWNER_PASSWORD=${INSTALL_OWNER_PASSWORD}
+      - INSTALL_OWNER_UID=${INSTALL_OWNER_UID}
+      - CS_INSTALL_OWNER=${INSTALL_OWNER}
+      - CS_INSTALL_OWNER_UID=${INSTALL_OWNER_UID}
+      - DOCBASE_NAME=${DOCBASE_NAME}
+      - DOCBASE_OWNER=${DOCBASE_OWNER}
+      - DOCBASE_OWNER_PASSWORD=${DOCBASE_OWNER_PASSWORD}
+      - DOCBROKER_HOST=${DOCBROKER_HOST}
+      - DOCBROKER_PORT=${DOCBROKER_PORT}
+      - JMS_HOST=${JMS_HOST}
+      - JMS_REMOTE_PORT=${JMS_REMOTE_PORT}
+      - JMS_PORT=${JMS_PORT}
+      - JMS_USER=${JMS_USER}
+      - JMS_PASSWORD=${JMS_PASSWORD}
+      - DOCKER_HOST=${DCTM_DOCKER_HOST}
+      - WILDFLY_VERSION=${WILDFLY_VERSION}
+      - DOCUMENTUM_INSTALL_DIR=/opt/dctm
+      - JBOSS=${JBOSS}
+      - SERVICE_NAME=${SERVICE_NAME}
+    privileged: true
+    depends_on:
+      - rcs
+
+  cs-db:
+    image: postgres:10.3
+    container_name:
+      "postgres"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres:/docker-entrypoint-initdb.d
+      - postgres_db_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - DOCBASE_NAME=${DOCBASE_NAME}
+
+  rcs:
+    image: localhost:5000/contentserver_centos:20.2.0000.0110
+    environment:
+      - DOCKER_HOST=${DCTM_DOCKER_HOST}
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_SERVER_PORT=${DATABASE_SERVER_PORT}
+      - SERVICE_NAME=${SERVICE_NAME}
+      - ROOT_PASSWORD=${ROOT_PASSWORD}
+      - INSTALL_OWNER=${INSTALL_OWNER}
+      - INSTALL_OWNER_PASSWORD=${INSTALL_OWNER_PASSWORD}
+      - INSTALL_OWNER_UID=${INSTALL_OWNER_UID}
+      - DOCBASE_NAME=${DOCBASE_NAME}
+      - DOCBASE_PASSWORD=${DOCBASE_PASSWORD}
+      - DOCBASE_ID=${DOCBASE_ID}
+      - DOCBROKER_PORT=${DOCBROKER_PORT}
+      - EXTERNAL_DOCBROKER_PORT=${EXTERNAL_DOCBROKER_PORT}
+      - GLOBAL_REGISTRY_PASSWORD=${GLOBAL_REGISTRY_PASSWORD}
+      - AEK_ALGORITHM=AES_256_CBC
+      - AEK_NAME=${AEK_NAME}
+      - AEK_PASSPHRASE=${AEK_PASSPHRASE}
+      - ENABLE_LOCKBOX=${ENABLE_LOCKBOX}
+      - LOCKBOX_FILE_NAME=${LOCKBOX_FILE_NAME}
+      - LOCKBOX_PASSPHRASE=${LOCKBOX_PASSPHRASE}
+      - CONFIGURE_THUMBNAIL_SERVER=${CONFIGURE_THUMBNAIL_SERVER}
+      - THUMBNAIL_SERVER_PORT=${THUMBNAIL_SERVER_PORT}
+      - THUMBNAIL_SERVER_SSL_PORT=${THUMBNAIL_SERVER_SSL_PORT}
+      - CONTENTSERVER_PORT=${CONTENTSERVER_PORT}
+      - APP_SERVER_PASSWORD=${APP_SERVER_PASSWORD}
+      - HIGH_VOLUME_SERVER_LICENSE=
+      - TRUSTED_LICENSE=
+      - STORAGEAWARE_LICENSE=
+      - XMLSTORE_LICENSE=
+      - SNAPLOCKSTORE_LICENSE=
+      - RPS_LICENSE=
+      - FED_RECD_SERVICE_LICENSE=
+      - RECORD_MANAGER_LICENSE=
+      - PRM_LICENSE=
+      - INSTALLER_UI=silent
+      - KEEP_TEMP_FILE=false
+      - INSTALLER_DEBUG_LOG=true
+      - USE_EXISTING_DATABASE_ACCOUNT=${USE_EXISTING_DATABASE_ACCOUNT}
+      - INDEXSPACE_NAME=DM_XCHIVE_DOCBASE
+      - USE_EXISTING_AEK_LOCKBOX=${USE_EXISTING_AEK_LOCKBOX}
+      - CONFIGURE_OPENJDK=${CONFIGURE_OPENJDK}
+      - POSTGRES_MAJAR_VERSION=${POSTGRES_MAJAR_VERSION}
+      - POSTGRES_MINAR_VERSION${POSTGRES_MINAR_VERSION}
+      - JBOSS=${JBOSS}
+      - WILDFLY_VERSION=${WILDFLY_VERSION}
+    hostname:
+      "lsd2cs"
+    container_name:
+      "lsd2cs"
+    ports:
+      - "1689:1689"
+      - "1690:1690"
+      - "50000:50000"
+      - "50001:50001"
+      - "9080:9080"
+      - "9082:9082"
+      - "9081:9081"
+      - "9084:9084"
+      - "8081:8081"
+      - "8443:8443"
+    volumes:
+     - lsd2repo1_odbc:/opt/dctm/odbc
+     - lsd2repo1_data:/opt/dctm/data
+     - lsd2repo1_dba:/opt/dctm/dba
+     - lsd2repo1_share:/opt/dctm/share
+     - lsd2repo1_dfc:/opt/dctm/config
+     - lsd2repo1_mdserver_conf:/opt/dctm/mdserver_conf
+     - lsd2repo1_mdserver_log:/opt/dctm/wildfly17.0.1/server/DctmServer_MethodServer/log
+     - lsd2repo1_mdserver_logs:/opt/dctm/wildfly17.0.1/server/DctmServer_MethodServer/logs
+     - lsd2repo1_Thumbnail_Server_conf:/opt/dctm/product/20.2/thumbsrv/conf
+     - lsd2repo1_Thumbnail_Server_webinf:/opt/dctm/product/20.2/thumbsrv/container/webapps/thumbsrv/WEB-INF
+     - lsd2repo1_xhive_storage:/opt/dctm/xhive_storage
+     - lsd2repo1_XhiveConnector:/opt/dctm/wildfly17.0.1/server/DctmServer_MethodServer/deployments/XhiveConnector.ear
+     - lsd2repo1_bpm:/opt/dctm/wildfly17.0.1/server/DctmServer_MethodServer/deployments/bpm.ear
+     - lsd2repo1_install:/opt/dctm/product/20.2/install/logs
+    privileged: true
+    depends_on:
+      - cs-db
+
+volumes:
+ postgres_db_data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: TargetF0lderL0cati0n/postgres_db_data
+ xcp-extra-dars:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: TargetF0lderL0cati0n/xcp-extra-dars
+ lsd2repo1_data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: TargetF0lderL0cati0n/lsd2repo1_data
+ lsd2repo1_share:
+    driver: local
+ lsd2repo1_dba:
+ lsd2repo1_dfc:
+ lsd2repo1_odbc:
+ lsd2repo1_mdserver_conf:
+ lsd2repo1_mdserver_log:
+ lsd2repo1_mdserver_logs:
+ lsd2repo1_Thumbnail_Server_conf:
+ lsd2repo1_Thumbnail_Server_webinf:
+ lsd2repo1_XhiveConnector:
+    driver: local
+ lsd2repo1_xhive_storage:
+    driver: local
+ lsd2repo1_bpm:
+ lsd2repo1_install:
