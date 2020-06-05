@@ -111,7 +111,7 @@ while true;
 			[Yy]*) 	echo "Deleting DCTM External Folders."
 					sudo rm -r $DCTM_EXTERNAL_FOLDERS
 					echo "DCTM External Folders Deleted."
-					sudo rm $D2LS_XPLORE_COMPOSE_FILE $D2LS_COMPOSE_FILE $BPM_COMPOSE_FILE
+					sudo rm $D2LS_XPLORE_COMPOSE_FILE $D2LS_COMPOSE_FILE $BPM_COMPOSE_FILE stop_LS.sh start_LS.sh
 					sleep 2
 					break;;
 					
