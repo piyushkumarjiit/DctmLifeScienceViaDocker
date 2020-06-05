@@ -3,7 +3,7 @@ version: '3.3'
 services:
       
   xcp-cs-setup:
-    image: localhost:5000/xcp/centos/stateless/xcp-pe-setup:20.2.0000.0045
+    image: localhost:5000/xcp/centos/stateless/xcp-pe-setup:20.2.0000.0054
     container_name:
       "xcp"
     volumes:
@@ -51,7 +51,7 @@ services:
       - DOCBASE_NAME=${DOCBASE_NAME}
 
   rcs:
-    image: localhost:5000/contentserver_centos:20.2.0000.0110
+    image: localhost:5000/contentserver/centos/stateless/cs:20.2.0000.0110
     environment:
       - DOCKER_HOST=${DCTM_DOCKER_HOST}
       - DATABASE_HOST=${DATABASE_HOST}
