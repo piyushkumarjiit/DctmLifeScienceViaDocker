@@ -1,0 +1,25 @@
+version: '2'
+services:
+  dfshost: 
+    image: localhost:5000/dfs/centos/stateless/dfs:20.2.0000.0080
+    environment:
+      - DOCBASE_NAME=${DOCBASE_NAME}
+      - BOF_REGISTRY_USER_PASSWORD=${GLOBAL_REGISTRY_PASSWORD}
+      - DOCBROKER_HOST=${DOCBROKER_HOST}
+      - DOCBROKER_PORT=${DOCBROKER_PORT}
+      - SECURE_CONNECT_MODE=try_native_first
+      - DFC_DATA_DIR=/var/documentum
+    hostname:
+     "dfshost" 
+    container_name:
+     "dfshost" 
+    ports:
+     - "8484:8080" 
+     - "8485:8443" 
+    volumes:
+     - dfshost_logs:/opt/tomcat/logs
+     - dfshost_conf:/opt/tomcat/CustomConf
+    privileged: true
+volumes:
+ dfshost_logs:
+ dfshost_conf:
