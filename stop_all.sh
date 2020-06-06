@@ -52,11 +52,12 @@ fi
 
 echo "Using DCTM Version: $DCTM_VERSION and Distro: $distro and Patch: $DCTM_PATCH_VERSION"
 
-DCTM_IMAGE_IDS="e36e66548d7b a69e22cfbcde 3f94b614b8ae 470d167a1f89 7d99c80f6d0f 0e8361f2565c e3b6ce03c407 028e0d6d5196 c14a575fed0e e8ffe74e4e1a 05e6ff1aa030 f6a72d6f0a1c 2a440282b925 d7c36d63c55c ea79c91d42bb 7bf64a664362 b0855b1483ec 6d2b3d545600 b993fca07adc 0846eef15a7c a2dcda4c3f4d 5e497111358e 6b8c7ef27448 1c15c7933c43 81d17b332e36 aad0149c2303 fe5a6caa7cd8 55b3025a1307 70d360bc8d7c"
-
+#DCTM_IMAGE_IDS="e36e66548d7b a69e22cfbcde 3f94b614b8ae 470d167a1f89 7d99c80f6d0f 0e8361f2565c e3b6ce03c407 028e0d6d5196 c14a575fed0e e8ffe74e4e1a 05e6ff1aa030 f6a72d6f0a1c 2a440282b925 d7c36d63c55c ea79c91d42bb 7bf64a664362 b0855b1483ec 6d2b3d545600 b993fca07adc 0846eef15a7c a2dcda4c3f4d 5e497111358e 6b8c7ef27448 1c15c7933c43 81d17b332e36 aad0149c2303 fe5a6caa7cd8 55b3025a1307 70d360bc8d7c"
+DCTM_IMAGE_IDS=$(docker images | awk -F " " '{print $3}' | sed "s#IMAGE##g")
+#DCTM_EXTERNAL_VOLUMES="ichigo_lsd2repo1_data ichigo_postgres_db_data ichigo_xcp-extra-dars ichigo_xplore"
+DCTM_EXTERNAL_VOLUMES=$(docker volume ls | awk -F " " '{print $2}' | sed "s#VOLUME##g")
+#Folders created by script to store data/logs in volumes
 DCTM_EXTERNAL_FOLDERS="lsd2repo1_data lsd2repo1_xplore postgres postgres_db_data xcp-extra-dars logs"
-
-DCTM_EXTERNAL_VOLUMES="ichigo_lsd2repo1_data ichigo_postgres_db_data ichigo_xcp-extra-dars ichigo_xplore"
 
 # if [[ -z DCTM_PATCH_VERSION ]]
 # then 
@@ -74,10 +75,12 @@ DCTM_EXTERNAL_VOLUMES="ichigo_lsd2repo1_data ichigo_postgres_db_data ichigo_xcp-
 	BPM_COMPOSE_FILE="bpm_compose_"$distro"_updated_"$DCTM_VERSION".yml"
 	D2LS_COMPOSE_FILE="lsd2_compose_"$distro"_updated_"$DCTM_VERSION".yml"
 	D2LS_XPLORE_COMPOSE_FILE="lsd2_compose_"$distro"_updated_xplore_"$DCTM_VERSION".yml"
+	DFS_COMPOSE_FILE="dfs_compose_"$distro"_updated_"$DCTM_VERSION".yml"
 #fi
 
 #Bring the services down.
 echo "Bringing the services down."
+docker-compose -f $DFS_COMPOSE_FILE down
 docker-compose -f $D2LS_XPLORE_COMPOSE_FILE down
 docker-compose -f $D2LS_COMPOSE_FILE down
 docker-compose -f $BPM_COMPOSE_FILE down
@@ -110,8 +113,8 @@ while true;
 			#Deleting DCTM External Folders
 			[Yy]*) 	echo "Deleting DCTM External Folders."
 					sudo rm -r $DCTM_EXTERNAL_FOLDERS
-					echo "DCTM External Folders Deleted."
-					sudo rm $D2LS_XPLORE_COMPOSE_FILE $D2LS_COMPOSE_FILE $BPM_COMPOSE_FILE stop_LS.sh start_LS.sh
+					echo "DCTM External Folders Deleted. Removing YAML files."
+					sudo rm $D2LS_XPLORE_COMPOSE_FILE $D2LS_COMPOSE_FILE $BPM_COMPOSE_FILE $DFS_COMPOSE_FILE stop_LS.sh start_LS.sh
 					sleep 2
 					break;;
 					
