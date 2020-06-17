@@ -9,5 +9,11 @@ then
 	mount -t cifs -o username=$3,password=$4 $2  $1
 	echo "Created Directory $1 and mounted $2 for SSV Filestore mounting."
 else
-	echo "Directory $1 exists!! Continuing without adding. Please add manually."
+	echo "Directory $1 exists!! Trying to mount on existing directory."
+	mount -t cifs -o username=$3,password=$4 $2  $1
+fi
+object_count=$(ls $1 | wc -l)
+if [[ object_count == "0" ]]
+then
+	echo "Mounted path seems empty. Please manually verify."
 fi
