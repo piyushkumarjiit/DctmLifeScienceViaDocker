@@ -16,4 +16,6 @@ object_count=$(ls $1 | wc -l)
 if [[ object_count == "0" ]]
 then
 	echo "Mounted path seems empty. Please manually verify."
+else
+	echo "Mounted successfully."
 fi
