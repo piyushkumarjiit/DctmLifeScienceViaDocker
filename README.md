@@ -16,12 +16,14 @@ If you downloaded the image to your local machine, upload to the server and plac
 It would be quicker if you have updated your server before proceeding with installation.
 
 ### Prerequisites
+The script is relatively self contained and fetches necessary files from github repo.
+
 <li>Access to Internet</li>
 <li>Respective Documentum images</li>
 <li>Running Linux environment with Docker.</li>
 <li>SSH, SUDO access to your server</li>
 
-The script is relatively self contained and fetches necessary files from github repo.
+
 
 ### LS Images
 To keep it as streamlined as possible, I have predefined images in YAML files being used by the script.
