@@ -13,7 +13,7 @@ Connect/SSH to your server/node and create a directory (Ex: mkdir -p /media/dctm
 Login to support.opentext.com and download all the LS Docker images for the version you want to install. 
 If you downloaded the image to your local machine, upload to the server and place in the directory (/media/dctmimages4) created in step 1.
 
-It would be quicker if you have updated your server before proceeding with installation.
+It would be quicker if you have updated your server/node and have setup Docker before proceeding with installation.
 
 ### Prerequisites
 The script is relatively self contained and fetches necessary files from github repo. To execute the script successfully we need:
