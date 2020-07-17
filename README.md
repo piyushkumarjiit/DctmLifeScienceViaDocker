@@ -16,7 +16,7 @@ If you downloaded the image to your local machine, upload to the server and plac
 It would be quicker if you have updated your server before proceeding with installation.
 
 ### Prerequisites
-The script is relatively self contained and fetches necessary files from github repo.
+The script is relatively self contained and fetches necessary files from github repo. To execute the script successfully we need:
 
 <li>Access to Internet</li>
 <li>Respective Documentum images</li>
