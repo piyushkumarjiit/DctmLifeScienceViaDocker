@@ -1,5 +1,9 @@
 # DctmLifeScienceViaDocker
 
+This script is not for Prod rather a quick way to spin up a specific version of Documentum Life Sciences to either demo the product or reproduce an issue.
+I use this as my Dev box at times when I do not have access to the target environment.
+I created and tested this on my bare metal and it worked really well so thought of sharing with the wider DCTM community.
+The script can setup 16.4,16.6, 16.6P2, 16.6.1 and 20.2 DCTM LS environments.
 
 
 ## Getting Started
@@ -60,7 +64,7 @@ Update the permissions on the downloaded file using:
 
 Now run below script and follow prompts:
 
-<code>sudo ./LS_on_Docker_V04.sh |& tee -a LS_Install.log</code>
+<code>sudo ./LS_on_Docker.sh |& tee -a LS_Install.log</code>
 
 
 ## Post Installation Steps
@@ -81,15 +85,23 @@ Login to DA, create/import users and set them in LS specific roles.
 
 ## Testing
 LS validation is too big to put here.
-For sanity testing, create a Cat 2 document, send it to a workflow and complete the workflow.
-If all these steps proceed as expected, the environment should be OK.
+For sanity testing, Import a PDF file as a Cat 2 document, send it to a workflow and complete the workflow.
+If all the steps involved proceed as expected, the environment should be OK.
 
 ## Start and Stop
 The script generates 2 scripts "start_LS.sh" and "stop_LS.sh" which can be used to start and stop the entire LS stack.
+### To Start
+<code>sudo ./start_LS.sh</code>
+### To Stop
+<code>sudo ./stop_LS.sh</code>
+
 Do not delete the directories created by the script as it contains Documentum and DB data.
 
 ## Whats Next
 This is just a start and all the steps outlined under Post Installation steps could be automated via shell scripts.
+
+Other components CTS/Render services, iHub, Brava etc. need to be set up (if needed).
+
 
 ## Authors
 **Piyush Kumar** - (https://github.com/piyushkumarjiit)
