@@ -1,10 +1,11 @@
 # DctmLifeScienceViaDocker
 
 This script is not for Prod rather a quick way to spin up a specific version of Documentum Life Sciences to either demo the product or reproduce an issue.
-I use this as my Dev box at times when I do not have access to the target environment.
+I use this as my Dev environment at times when I do not have access to the target environment.
 I created and tested this on my bare metal and it worked really well so thought of sharing with the wider DCTM community.
 The script can setup 16.4,16.6, 16.6P2, 16.6.1 and 20.2 DCTM LS environments.
 
+If something is not clear on this ReadMe, I would recommend to downland the script and take a look as I have added comments to make it easy for other to understand and customize as needed.
 
 ## Getting Started
 
