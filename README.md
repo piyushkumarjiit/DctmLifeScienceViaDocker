@@ -5,13 +5,13 @@ I use this as my Dev environment at times when I do not have access to the targe
 I created and tested this on my bare metal and it worked really well so thought of sharing with the wider DCTM community.
 The script can setup 16.4,16.6, 16.6P2, 16.6.1 and 20.2 DCTM LS environments.
 
-If something is not clear on this ReadMe, I would recommend to downland the script and take a look as I have added comments to make it easy for other to understand and customize as needed.
+If something is not clear on this ReadMe, I would recommend to download the script and take a look as I have added comments to make it easy for others to understand and customize as needed.
 
 ## Getting Started
 
-Connect/SSH to your server/node and create a directory (Ex: mkdir -p /media/dctmimages4 ).
-Login to support.opentext.com and download all the LS Docker images for the version you want to install. 
-If you downloaded the image to your local machine, upload to the server and place in the directory (/media/dctmimages4) created in step 1.
+Connect/SSH to your server/node and create a directory where we will keep all the Documentum Life Sciences Docker images (Ex: mkdir -p /media/dctmimages4 ).
+Login to support.opentext.com and download all the LS Docker images for the version you want to install.
+If you downloaded the image to your local machine, upload them to the server and place in the directory (/media/dctmimages4) created in step 1.
 
 It would be quicker if you have updated your server/node and have setup Docker before proceeding with installation.
 
@@ -55,7 +55,7 @@ For older LS versions, take a look at the respective YAML file present in the YA
 <li>lswebapps_docker_centos:16.6.1000.0126</li>
 
 
-### Installation
+## Installation
 
 After completing the prerequisite step defined above, connect to your server (terminal or SSH session), got your home directory and run below commands  :
 
