@@ -15,7 +15,7 @@ What all the script installs:
 <li>xPlore</li>
 <li>IndexAgent</li>
 
-
+<br/>
 The script can setup 16.4,16.6, 16.6P2, 16.6.1 and 20.2 DCTM LS environments.
 
 If something is not clear on this ReadMe, I would recommend to download the script and take a look as I have added comments to make it easy for others to understand and customize as needed.
