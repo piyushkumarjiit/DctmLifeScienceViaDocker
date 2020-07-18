@@ -80,7 +80,7 @@ Update the permissions on the downloaded file using:
 
 Now run below script and follow prompts:
 
-<code>sudo ./LS_on_Docker.sh |& tee -a LS_Install.log</code>
+<code>./LS_on_Docker.sh |& tee -a LS_Install.log</code>
 
 
 ## Post Installation Steps
