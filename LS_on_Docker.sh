@@ -151,7 +151,7 @@ fi
 
 if [[ $DCTM_VERSION == "166" ]]
 then
-	echo "Setting Wildfly and OpenJDK options."
+	echo "Setting Wildfly and OpenJDK options for $DCTM_VERSION."
 	#Extra 16.6 Variables
 	export WILDFLY_VERSION="wildfly11.0.0"
 	export JBOSS="wildfly11.0.0"
@@ -172,7 +172,7 @@ fi
 
 if [[ $DCTM_VERSION == "1661" ]]
 then
-	echo "Setting Wildfly and OpenJDK options."
+	echo "Setting Wildfly and OpenJDK options for $DCTM_VERSION."
 	#Extra 16.6 Variables
 	export WILDFLY_VERSION="wildfly11.0.0"
 	export JBOSS="wildfly11.0.0"
@@ -188,7 +188,7 @@ fi
 
 if [[ $DCTM_VERSION == "202" ]]
 then
-	echo "Setting Wildfly and OpenJDK options."
+	echo "Setting Wildfly and OpenJDK options for $DCTM_VERSION."
 	#Extra 16.6 Variables
 	export WILDFLY_VERSION="wildfly17.0.1"
 	export JBOSS="wildfly17.0.1"
@@ -200,8 +200,8 @@ then
 	export DCTM_INSTALL_LOCATION="/opt/dctm/product/20.2"
 	export D2InstallLocation="D2CS-install"
 	export D2_INSTALL_FILE_DIR="/opt/$D2InstallLocation"
-	#Local Config to crawl different folder for LSS20.2 Docker Image files. Could come handy.
-	#export image_dir=
+	#Local Config to crawl different folder for LSS20.2 Docker Image files. Could come handy while testing a patch before rollout.
+	export image_dir=/media/dctmimages4
 fi
 
 if [[ $DCTM_VERSION == "166" && $DCTM_PATCH_VERSION != 2 ]]
@@ -1049,8 +1049,8 @@ else
 
 
 	#Change the default D2 client plugin preference
-	lsd2client_container_id=$(docker ps -qf name=lsd2client)
-	docker exec -it $lsd2client_container_id bash -c 'sed -i "s#browser.plugin.mode = wsctf,thin#browser.plugin.mode = thin,wsctf#g" /usr/local/tomcat/CustomConf/settings.properties'
+	#lsd2client_container_id=$(docker ps -qf name=lsd2client)
+	#docker exec -it $lsd2client_container_id bash -c 'sed -i "s#browser.plugin.mode = wsctf,thin#browser.plugin.mode = thin,wsctf#g" /usr/local/tomcat/CustomConf/settings.properties'
 
 
 	docker logs $cs_container_id >& $SETUP_BASE_DIR/logs/lsd2cs.log
