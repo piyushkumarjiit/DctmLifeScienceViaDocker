@@ -9,6 +9,11 @@ set -e
 export DCTM_DOCKER_HOST=$(hostname -I | cut -d" " -f 1)
 export DCTM_DOCKER_PORT="5000"
 
+# Environment Proxy details.
+USE_PROXY=false
+HTTP_PROXY=
+HTTPS_PROXY=
+
 #Update below value if you already have an existing Local Docker registry.
 LOCAL_DOCKER_REGISTRY=localhost:5000
 
@@ -284,8 +289,10 @@ if [[ $docker_installed -gt 0 ]]
 then
 	#Install Docker on server
 	echo "Docker does not seem to be available. Trying to install Docker."
-	curl -fsSL https://get.docker.com -o get-docker.sh
-	sudo sh get-docker.sh
+	#curl -fsSL https://get.docker.com -o get-docker.sh
+	#sudo sh get-docker.sh
+	sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+	sudo dnf -y  install docker-ce --nobest
 	sudo usermod -aG docker $USER
 	#Enable Docker to start on start up
 	sudo systemctl enable docker
@@ -328,6 +335,22 @@ then
 else
 	echo "Docker already installed. Proceeding with LS installation."
 fi
+
+if [[ $USE_PROXY == "true" ]]
+then
+	sudo mkdir -p /etc/systemd/system/docker.service.d
+	cat <<-EOF > /etc/systemd/system/docker.service.d/http-proxy.conf
+	[Service]
+	Environment="HTTP_PROXY=$HTTP_PROXY"
+	Environment="HTTPS_PROXY=$HTTPS_PROXY"
+	Environment="NO_PROXY=localhost,127.0.0.1"
+	EOF
+	sudo systemctl daemon-reload
+	sudo systemctl restart docker
+else
+	echo "Not using Proxy config for Docker."
+fi
+
 
 #Check if Docker Compose needs to be installed
 doc_compose_installed=$(docker-compose -v > /dev/null 2>&1; echo $?)
