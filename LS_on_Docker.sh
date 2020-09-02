@@ -287,12 +287,15 @@ sed -i "s#TargetF0lderL0cati0n#$SETUP_BASE_DIR#g" $SETUP_BASE_DIR/$D2LS_XPLORE_C
 docker_installed=$(docker -v > /dev/null 2>&1; echo $?)
 if [[ $docker_installed -gt 0 ]]
 then
+	set +e
 	#Install Docker on server
 	echo "Docker does not seem to be available. Trying to install Docker."
-	#curl -fsSL https://get.docker.com -o get-docker.sh
-	#sudo sh get-docker.sh
-	sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
-	sudo dnf -y  install docker-ce --nobest
+	curl -fsSL https://get.docker.com -o get-docker.sh
+	# Remove set -e from script
+	#sed -i "s*set -e*#set -e*g" get-docker.sh
+	sudo sh get-docker.sh
+	#sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+	#sudo dnf -y  install docker-ce --nobest
 	sudo usermod -aG docker $USER
 	#Enable Docker to start on start up
 	sudo systemctl enable docker
@@ -300,6 +303,7 @@ then
 	sudo systemctl start docker
 	#Remove temp file.
 	rm get-docker.sh
+	set -e
 	#Check again
 	docker_installed=$(docker -v > /dev/null 2>&1; echo $?)
 	if [[ $docker_installed == 0 ]]
@@ -308,7 +312,8 @@ then
 		echo "Reconnect and rerun the script. Exiting."
 		sleep 10
 		exit 1
-	else
+	elif [[ $distro == "centos" ]]
+	then
 		echo "Unable to install Docker. Trying the nobest option as last resort."
 		sleep 2
 		sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
@@ -331,7 +336,11 @@ then
 			sleep 5
 			exit 1
 		fi
-	fi		
+	else
+		echo "Unable to install Docker."
+		sleep 2
+		exit 1
+	fi
 else
 	echo "Docker already installed. Proceeding with LS installation."
 fi
