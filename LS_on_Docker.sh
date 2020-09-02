@@ -10,9 +10,9 @@ export DCTM_DOCKER_HOST=$(hostname -I | cut -d" " -f 1)
 export DCTM_DOCKER_PORT="5000"
 
 # Environment Proxy details.
-USE_PROXY=false
-HTTP_PROXY=
-HTTPS_PROXY=
+USE_PROXY="false"
+HTTP_PROXY=""
+HTTPS_PROXY=""
 
 #Update below value if you already have an existing Local Docker registry.
 LOCAL_DOCKER_REGISTRY=localhost:5000
