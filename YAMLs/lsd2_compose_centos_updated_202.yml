@@ -15,7 +15,7 @@ services:
       - DOCBASE_NAME=${DOCBASE_NAME}
 
   rcs:
-    image: localhost:5000/artifactory.otxlab.net/bpdockerhub/lifescience/centos/stateless/lsd2cs:20.2.0000.0232
+    image: localhost:5000/artifactory.otxlab.net/bpdockerhub/lifescience/centos/stateless/dctm-ls-d2pp-cs:20.2.0000.0232
     environment:
       - DOCKER_HOST=${DCTM_DOCKER_HOST}
       - DATABASE_HOST=${DATABASE_HOST}
@@ -142,7 +142,7 @@ services:
       - rcs
 
   lsd2config:
-    image: localhost:5000/artifactory.otxlab.net/bpdockerhub/lifescience/centos/stateless/lsd2config:20.2.0000.0232
+    image: localhost:5000/artifactory.otxlab.net/bpdockerhub/lifescience/centos/stateless/dctm-ls-d2pp-config:20.2.0000.0232
     environment:
       - DOCBROKER_HOST=${DOCBROKER_HOST}
       - DOCBROKER_PORT=${DOCBROKER_PORT}
@@ -172,7 +172,7 @@ services:
       - da
 
   lsd2client:
-    image: localhost:5000/artifactory.otxlab.net/bpdockerhub/lifescience/centos/stateless/lsd2client:20.2.0000.0232
+    image: localhost:5000/artifactory.otxlab.net/bpdockerhub/lifescience/centos/stateless/dctm-ls-d2pp-classic:20.2.0000.0232
     environment:
       - DOCBROKER_HOST=${DOCBROKER_HOST}
       - DOCBROKER_PORT=${DOCBROKER_PORT}
@@ -203,7 +203,7 @@ services:
       - lsd2config
 
   lswebapps:
-    image: localhost:5000/artifactory.otxlab.net/bpdockerhub/lifescience/centos/stateless/lswebapps:20.2.0000.0232
+    image: localhost:5000/artifactory.otxlab.net/bpdockerhub/lifescience/centos/stateless/dctm-ls-print:20.2.0000.0232
     environment:
       - DOCBROKER_HOST=${DOCBROKER_HOST}
       - DOCBROKER_PORT=${DOCBROKER_PORT}
