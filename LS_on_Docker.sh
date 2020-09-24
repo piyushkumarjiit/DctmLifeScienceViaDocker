@@ -3,7 +3,7 @@
 #Step 1: Download; Step 2: Grant permission to script by "chmod 755 LS_on_Docker.sh" ; Step 3: ./LS_on_Docker.sh |& tee -a LS_Install.log
 
 #Abort installation if any of the commands fail
-set -e
+#set -e
 
 #Set environment variables
 export DCTM_DOCKER_HOST=$(hostname -I | cut -d" " -f 1)
@@ -287,7 +287,7 @@ sed -i "s#TargetF0lderL0cati0n#$SETUP_BASE_DIR#g" $SETUP_BASE_DIR/$D2LS_XPLORE_C
 docker_installed=$(docker -v > /dev/null 2>&1; echo $?)
 if [[ $docker_installed -gt 0 ]]
 then
-	set +e
+	#set +e
 	#Install Docker on server
 	echo "Docker does not seem to be available. Trying to install Docker."
 	curl -fsSL https://get.docker.com -o get-docker.sh
@@ -303,7 +303,7 @@ then
 	sudo systemctl start docker
 	#Remove temp file.
 	rm get-docker.sh
-	set -e
+	#set -e
 	#Check again
 	docker_installed=$(docker -v > /dev/null 2>&1; echo $?)
 	if [[ $docker_installed == 0 ]]
